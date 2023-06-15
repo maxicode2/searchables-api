@@ -1,0 +1,38 @@
+plugins {
+    id 'java-library'
+}
+
+group = project.maven_group
+version = project.lib_version
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:16.0.2'
+
+    implementation "com.google.guava:guava:32.0.1-jre"
+    implementation "org.apache.commons:commons-lang3:3.12.0"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.9.2"
+    testImplementation "org.hamcrest:hamcrest:2.2"
+}
+
+tasks.test {
+    useJUnitPlatform()
+
+    maxHeapSize = "1G"
+
+    testLogging {
+        events "passed"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+    base.archivesName.set("Searchables-api")
+}
